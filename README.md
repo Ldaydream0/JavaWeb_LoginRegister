@@ -6,6 +6,17 @@
 
 注意：在项目中UserServlet 继承 自定义BaseServlet 进行了抽取
 
+## 说明
+
+- 项目中使用了过滤器 进行权限的判断，不过由于时间仓促，可以说这部分还是有很大的问题，部署项目在本地后，你需要 使用 账号：admin 密码：admin888，进行管理员登录才可以访问其他页面
+
+- sql 我放在了目录下 message.sql 
+
+- 这个项目使用的是后端分页，admin_list_userInfo前端分页Demo.html 这个页面是应用了一个Boostrap的前端分页插件，仅供参考，可以删掉。
+
+- 这个项目主要点在于 相对完整的用户注册登录功能 以及管理员对于用户信息的后台增删改查功能
+
+  
 ## 效果展示
 
 
@@ -18,19 +29,6 @@
 ![](https://github.com/ideal-20/JavaWeb_LoginRegister/blob/master/web/img/3.png)
 
 ![](https://github.com/ideal-20/JavaWeb_LoginRegister/blob/master/web/img/4.png)
-
-
-## 说明
-
-- 项目中使用了过滤器 进行权限的判断，不过由于时间仓促，可以说这部分还是有很大的问题，部署项目在本地后，你需要 使用 账号：admin 密码：admin888，进行管理员登录才可以访问其他页面
-
-- sql 我放在了目录下 message.sql 
-
-- 这个项目使用的是后端分页，admin_list_userInfo前端分页Demo.html 这个页面是应用了一个Boostrap的前端分页插件，仅供参考，可以删掉。
-
-- 这个项目主要点在于 相对完整的用户注册登录功能 以及管理员对于用户信息的后台增删改查功能
-
-  
 
 
 ## 结尾
