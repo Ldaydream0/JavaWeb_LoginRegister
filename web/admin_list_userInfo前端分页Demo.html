@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+  <!-- 指定字符集 -->
+  <meta charset="utf-8">
+  <!-- 使用Edge最新的浏览器的渲染方式 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+  width: 默认宽度与设备的宽度相同
+  initial-scale: 初始的缩放比，为1:1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>用户信息管理系统</title>
+
+  <!-- 导入CSS的全局样式 -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!--导入表格插件样式表-->
+  <link href="css/bootstrap-table.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+  <h3 style="text-align: center">用户信息列表</h3>
+
+  <!--存放工具栏-->
+  <div id="toolbar"></div>
+  <!--存放生成的表格-->
+  <table id="userInfo_table" class="table table-hover">
+  </table>
+
+</div>
+<!-- jQuery导入，建议使用1.9以上的版本 -->
+<script src="js/jquery-2.1.0.min.js"></script>
+<!-- 导入bootstrap的js文件 -->
+<script src="js/bootstrap.min.js"></script>
+<!--导入表格插件-->
+<script src="js/bootstrap-table.min.js"></script>
+<style type="text/css">
+  td, th {
+    text-align: center;
+  }
+</style>
+
+<script>
+    $(function () {
+        $("#userInfo_table").bootstrapTable({
+            url: 'user/userList',
+            toolbar: '#toolbar',
+            method: 'GET',
+            striped: true,                        //是否显示行间隔色
+            cache: false,                         //是否使用缓存
+            toolbarAlign: "right",                //工具栏对齐方式
+            sidePagination: "client",             //分页方式：client客户端分页，server服务端分页
+            search: true,                         //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+            uniqueId: "id",
+            pageNumber: 1,                        //初始化加载第一页
+            pageSize: 10,                         //每页的记录行数
+            pageList: [5, 10, 15, 20],            //可供选择的每页的行数
+            pagination: true,                     // 是否分页
+            sortable: true,                       // 是否启用排序
+            sortOrder: "asc",                     //排序方式
+            showColumns: true,                    //是否显示列选择按钮
+            showRefresh: true,                    //是否显示刷新按钮
+            clickToSelect: true,                  //是否启用点击选中行
+            // height: 500,                       //行高
+            showToggle: true,                     //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                      //是否显示详细视图
+            detailView: false,                    //是否显示父子表
+            queryParamsType: '',//设置请求参数格式
+            queryParams: function queryParams(params) { //设自定义查询参数
+                /*请求远程数据时，可以通过修改queryParams来发送其他参数。
+                如果queryParamsType = 'limit'，params对象包含：limit，offset，search，sort，order。
+                否则，它包含：pageSize，pageNumber，searchText，sortName，sortOrder。
+                返回false停止请求。
+                默认： function(params) { return params }*/
+                return params;
+            },
+
+            columns: [{
+                title: "全选",
+                field: "select",
+                checkbox: true,
+                width: 20, //宽度
+                align: "center", //水平
+                valign: "middle" //垂直
+            }, {
+                field: 'uid',
+                title: '编号'
+            }, {
+                field: 'username',
+                title: '用户名'
+            }, {
+                field: 'nickname',
+                title: '昵称'
+            }, {
+                field: 'email',
+                title: '邮箱'
+            }, {
+                field: 'telephone',
+                title: '电话'
+            }, {
+                field: 'gender',
+                title: '性别'
+            }, {
+                field: 'birthday',
+                title: '生日'
+            },{
+                field: 'id',
+                title: '操作',
+                // width: 120,
+                align: 'center',
+                valign: 'middle',
+                formatter: actionFormatter
+            }]
+        })
+    })
+    //操作栏的格式化
+    function actionFormatter(value, row, index) {
+        var id = row.id;
+        var result = "";
+        result += "<button style='cursor: pointer;margin-right: 5px' class='btn btn-primary' title='修改' onclick=''>修改</button>";
+        result += "<button style='cursor: pointer' class='btn btn-primary' title='删除' onclick=''>删除</button>";
+        return result;
+    }
+</script>
+
+</body>
+</html>
